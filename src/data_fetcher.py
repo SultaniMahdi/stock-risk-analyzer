@@ -16,5 +16,5 @@ def fetch_data(ticker: str, start="2024-01-01", end="2024-12-31"):
     data = yf.download(ticker, start=start, end=end)
     if data.empty:
         raise ValueError(f"No data found for {ticker}")
-    data["returns"] = data["Adj Close"].pct_change()
+    data["returns"] = data["Close"].pct_change()
     return data.dropna()
