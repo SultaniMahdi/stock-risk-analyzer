@@ -24,10 +24,9 @@ jobs:
     # ✅ Step 3: Linting (Code Quality Check)
     - name: Lint Python code
       run:
-        pip install coverage pytest
+        pip install coverage pytest black flake8 isort mypy
         coverage run -m pytest
-        coverage xml |
-        pip install black flake8 isort mypy
+        coverage xml 
         black --check .
         flake8 .
         isort --check-only .
