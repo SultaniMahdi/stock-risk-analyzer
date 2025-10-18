@@ -19,33 +19,28 @@ jobs:
 
     # Step 2: Set up Docker
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
-    # Step 3: Build Docker image
+    # ✅ Step 3: Linting (Code Quality Check)
+    - name: Lint Python code
+      run: |
+        pip install black flake8 isort mypy
+        black --check .
+        flake8 .
+        isort --check-only .
+        mypy .
+
+    # Step 4: Build Docker container
     - name: Build Docker image
-      run: docker build -t stock-risk-analyzer-app .
+      run: docker build -t stock-risk-analyzer .
 
-    # Step 4: Run tests inside Docker
+    # Step 5: Run Tests
     - name: Run tests
       run: |
-        docker run --rm stock-risk-analyzer-app /bin/bash -c "
-          python3 -m venv venv && \
-          source venv/bin/activate && \
-          pip install -r requirements.txt && \
-          pip install pytest && \
-          pytest
-        "
+        docker run --rm stock-risk-analyzer pytest
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build-and-test
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Deploy locally (example)
+    # Step 6: Deploy (optional)
+    - name: Deploy
       run: |
         docker compose down || true
         docker compose up -d --build
