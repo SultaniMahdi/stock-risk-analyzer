@@ -1,4 +1,4 @@
-import pytest
+#import pytest
 
 from src.data_fetcher import fetch_data
 
