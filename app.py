@@ -3,8 +3,8 @@ from src.data_fetcher import fetch_data
 from src.risk_calculator import calculate_volatility
 
 
-
 app = Flask(__name__)
+
 
 @app.route("/volatility")
 def get_volatility():
@@ -13,6 +13,6 @@ def get_volatility():
     vol = calculate_volatility(data["returns"])
     return jsonify({"ticker": ticker, "volatility": round(vol, 4)})
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
