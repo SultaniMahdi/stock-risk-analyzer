@@ -1,4 +1,5 @@
 import numpy as np
+
 from src.risk_calculator import calculate_volatility
 
 

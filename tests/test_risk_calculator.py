@@ -1,5 +1,6 @@
-import pytest
 import pandas as pd
+import pytest
+
 from src.risk_calculator import calculate_volatility
 
 

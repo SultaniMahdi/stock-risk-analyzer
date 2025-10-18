@@ -1,5 +1,5 @@
-import yfinance as yf
 import pandas as pd
+import yfinance as yf
 
 
 def fetch_data(ticker: str, start="2024-01-01", end="2024-12-31"):

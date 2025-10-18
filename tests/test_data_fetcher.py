@@ -1,4 +1,5 @@
 import pytest
+
 from src.data_fetcher import fetch_data
 
 

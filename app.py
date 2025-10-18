@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
+
 from src.data_fetcher import fetch_data
 from src.risk_calculator import calculate_volatility
-
 
 app = Flask(__name__)
 
